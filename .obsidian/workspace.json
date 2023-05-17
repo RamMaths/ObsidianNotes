@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "ad80d49d6afb2773",
+    "type": "split",
+    "children": [
+      {
+        "id": "447ed562172e726d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "62014453ec49b64a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Nodejs/Mongoose.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bb582e949fac45bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "94ab3e802a13f024",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ccc9ffb8b64b1fd9",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3fdc098113fdbb24",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ff432166149522eb",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "1ec244b2c22e01bf",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 219.5
+  },
+  "right": {
+    "id": "209f4fcaef91b498",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ad120ccda3e00b2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c123c7aa7c4f1706",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Nodejs/Mongoose.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7afda9a57b749595",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Nodejs/Mongoose.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d606f3862d8dbf62",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "06390208d561bc56",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Nodejs/Mongoose.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "ccc9ffb8b64b1fd9",
+  "lastOpenFiles": [
+    "Tensorflowjs/3_Chapter.md",
+    "zImages/Screenshot 2023-05-17 at 12.30.40.png",
+    "zImages/Screenshot 2023-05-17 at 12.29.22.png",
+    "Tensorflowjs/1_Chapter.md",
+    "Tensorflowjs/2_Chapter.md",
+    "dsu/Linux/exam.md",
+    "Nodejs/Mongoose.md",
+    "zImages/Screenshot 2023-05-14 at 0.03.50.png",
+    "Reactjs/2_Advanced.md",
+    "Tensorflowjs",
+    "Javascript/Basics.md",
+    "Nodejs",
+    "Javascript/Asynchronous Javascript.md",
+    "Javascript/Arrays.md",
+    "Javascript/AdvancedDOM.md",
+    "dsu/Linux",
+    "dsu",
+    "Reactjs/1_Fundamentals.md",
+    "Javascript/Theory.md",
+    "Javascript/ProjectPlanning.md",
+    "Javascript/OOP.md",
+    "Javascript/NumbersDatesEtc.md",
+    "Javascript/documentObject.md",
+    "Javascript/Data structures and modern operators.md",
+    "React/README.md",
+    "Reactjs",
+    "random notes.md",
+    "WHAT IS CRIME IN KOREA.md",
+    "zImages/Screenshot 2023-02-15 at 19.15.17.png",
+    "zImages/Screenshot 2023-02-16 at 9.20.52.png",
+    "zImages/Screenshot 2023-02-13 at 21.34.49.png",
+    "zImages/Screenshot 2023-02-14 at 20.10.12.png"
+  ]
+}
