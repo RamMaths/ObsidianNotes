@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Nodejs/Mongoose.md",
+                "file": "Tensorflowjs/3_Chapter.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "300928c8919e517f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MathFoundations/LinearAlgebra.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -49,7 +62,7 @@
               "type": "search",
               "state": {
                 "query": "",
-                "matchingCase": true,
+                "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
                 "extraContext": false,
@@ -77,7 +90,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 219.5
+    "width": 200
   },
   "right": {
     "id": "209f4fcaef91b498",
@@ -93,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Nodejs/Mongoose.md",
+                "file": "MathFoundations/LinearAlgebra.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Nodejs/Mongoose.md",
+                "file": "MathFoundations/LinearAlgebra.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Nodejs/Mongoose.md"
+                "file": "MathFoundations/LinearAlgebra.md"
               }
             }
           }
@@ -156,13 +169,17 @@
   },
   "active": "ccc9ffb8b64b1fd9",
   "lastOpenFiles": [
+    "zImages/Screenshot 2023-05-18 at 20.51.17.png",
     "Tensorflowjs/3_Chapter.md",
+    "MathFoundations/LinearAlgebra.md",
+    "MathFoundations",
+    "zImages/Screenshot 2023-05-18 at 12.15.44.png",
+    "Tensorflowjs/2_Chapter.md",
+    "Tensorflowjs/1_Chapter.md",
+    "Nodejs/Mongoose.md",
     "zImages/Screenshot 2023-05-17 at 12.30.40.png",
     "zImages/Screenshot 2023-05-17 at 12.29.22.png",
-    "Tensorflowjs/1_Chapter.md",
-    "Tensorflowjs/2_Chapter.md",
     "dsu/Linux/exam.md",
-    "Nodejs/Mongoose.md",
     "zImages/Screenshot 2023-05-14 at 0.03.50.png",
     "Reactjs/2_Advanced.md",
     "Tensorflowjs",

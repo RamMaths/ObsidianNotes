@@ -25,7 +25,6 @@ one-dimensional (1D) array
 ## Creating tensors
 
 ```js
-// creating our first tensor
 const dataArray = [8, 6, 7, 5, 3, 0, 9] ;
 // 1
 const first = tf.tensor(dataArray);
@@ -98,7 +97,6 @@ All tensors and models have a `.dispose()` method that purges a tensor from memo
 | :--: | :--: | :--: |
 |Javascript variable is live|This variable is live; you can read the tensor|An error will be raised if you attempt to use this tensor.|
 |JavaScript variable has no reference|This is a memory leak|This is a properly destroyed tensor|
-
 
 Tensors do have an auto-clean option called tidy(). You can use tidy to create a functional encapsulation that will clean all tensors that aren't returned or flagged for being kept with `keep()`. 
 
@@ -189,4 +187,81 @@ tf.matMul(mat1, mat2).print();
 ```
 
 ![[Screenshot 2023-05-17 at 12.30.40.png]]
+
+## Dot product
+
+It's a way to identify similarity between tensors represented as vectors. ==The more two tensors are similar, the higher their dot product will be.== When two vectors on that graph are close together, their dot product is a larger number. When they are in opposite directions, the dot product is a negative number. This is how the recommender that we will build mathematically knows two things are similar
+
+![[Screenshot 2023-05-18 at 12.15.44.png]]
+
+*Two negative vectors that are similar have a positive dot product*
+
+### Recommender
+
+Let's get started creating a recommender
+
+#### the data
+
+```js
+const users = ['Gant', 'Todd', 'Jed', 'Justin'];
+const band = [
+  'Nirvana',
+  'Nine Inch Nails',
+  'Backstreet Boys',
+  'N Sync',
+  'Night Club',
+  'Apashe',
+  'STP'
+];
+
+const features = [
+  'Grunge',
+  'Rock',
+  'Industrial',
+  'Boy Band',
+  'Dance',
+  'Techno'
+];
+
+const user_votes = tf.tensor([
+  [10, 9, 1, 1, 8, 7, 8],
+  [6, 8, 2, 2, 0, 10, 0],
+  [0, 2, 10, 9, 3, 7, 0],
+  [7, 4, 2, 3, 6, 5, 5]
+]);
+
+//Music styles
+const band_feats = tf.tensor([
+  [1, 1, 0, 0, 0, 0],
+  [1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 1, 0],
+  [0, 0, 0, 1, 0, 0],
+  [0, 0, 1, 0, 0, 1],
+  [0, 0, 1, 0, 0, 1],
+  [1, 1, 0, 0, 0, 0]
+]);
+```
+
+by reading the `user_votes` variable, you can see each user's votes. The `band_feats` variable maps each band to the genres they fulfill. For example, the second band at index 1 is Nine Inch Nails and has a positive scoring for Grunge and Industrial styles of music.
+
+Now we can calculate each users's favorite genres based on their votes:
+
+```js
+const user_feats = tf.matMul(user_votes, band_feats);
+user_feats.print();
+```
+
+Now `user_feats`contains a dot product of the user's votes across the features of each band.
+
+```
+Tensor
+    [[27, 18, 24, 2 , 1 , 15],
+     [14, 6 , 18, 4 , 2 , 10],
+     [2 , 0 , 12, 19, 10, 10],
+     [16, 12, 15, 5 , 2 , 11]]
+```
+
+This tensor shows the value of the features of each user. You can use a method called `topk`to help us identify the top values for each user with size *k*. To get the top *k* tensors or simply identify where the top values are via identifying their indices,  ==you call the function== `topk`  ==with the desired tensor and size.==
+
+
 
