@@ -8,9 +8,9 @@ A tensor as defined mathematically, is simply a structured set of values of any 
 
 As you add a new dimension to each array, it's often said you are increasing the rank of a tensor.
 
-- Rank or Order: The rank of a tensor corresponds to the number of indices needed to specify its components. It indicates the number of dimensions of the tensor. For example, a rank-one tensor is a vector, while a rank-two tensor is a matrix.
-- Shape and Size: The shape of a tensor refers to the number of elements along each dimension. For instance, a tensor with shape (3, 4) has three elements along the first dimension and four elements along the second dimension. The size of a tensor represents the total number of elements it contains.
-- Components: Tensors are composed of components or entries, which are numerical values assigned to each element of the tensor. These components can be real numbers, complex numbers, or even functions, depending on the context.
+- *Rank or Order*: The rank of a tensor corresponds to the number of indices needed to specify its components. It indicates the number of dimensions of the tensor. For example, a rank-one tensor is a vector, while a rank-two tensor is a matrix.
+- *Shape and Size*: The shape of a tensor refers to the number of elements along each dimension. For instance, a tensor with shape (3, 4) has three elements along the first dimension and four elements along the second dimension. The size of a tensor represents the total number of elements it contains.
+- *Components*: Tensors are composed of components or entries, which are numerical values assigned to each element of the tensor. These components can be real numbers, complex numbers, or even functions, depending on the context.
 
 one-dimensional (1D) array
 
@@ -34,10 +34,10 @@ const first_again = tf.tensor1d(dataArray);
 
 The second method provides an extra level of runtime checking since you’ve defined the expected dimensionality. Methods exist for verifying up to six dimensions with `tf.tensor6d()`.
 
-The default data type to store numbers is Float32. Floating-point numbers are quite dynamic and impressive. They can usually handle most numbers you’ll need and be ready for values between. Unlike JavaScript arrays, a tensor’s data type must be homogeneous (all the same type). These types can be only Float32, Int32, bool, complex64, or string, with no mixing between.
+The default data type to store numbers is Float32. Floating-point numbers are quite dynamic and impressive. They can usually handle most numbers you’ll need and be ready for values between. Unlike ==JavaScript arrays, a tensor’s data type must be homogeneous (all the same type). These types can be only Float32, Int32, bool, complex64, or string, with no mixing between==.
 
 The second parameter of the `tf.tensor` function, defines the shape of the tensor.
-The third parameter of the `tf.tensor` function, which explicitly defines the ten‐ sor’s type structure.
+The third parameter of the `tf.tensor` function, which explicitly defines the tensor’s type structure.
 
 #### Tic-tac-toe example
 
@@ -91,7 +91,7 @@ console.log(tf.memory().numBytes);
 
 Tensors are for handling large accelerated data, the idea of leaving these sizable chunks in memory is a problem. With one small loop, you could leak an entire computer's available RAM and GPU. 
 
-All tensors and models have a `.dispose()` method that purges a tensor from memory.When you call `.dispose()` on a tensor, the `numTensors` will go down by the number of tensors you just released.
+All tensors and models have a `.dispose()` method that purges a tensor from memory. When you call `.dispose()` on a tensor, the `numTensors` will go down by the number of tensors you just released.
 
 | |tensor live| tensor disposed|
 | :--: | :--: | :--: |
@@ -263,5 +263,13 @@ Tensor
 
 This tensor shows the value of the features of each user. You can use a method called `topk`to help us identify the top values for each user with size *k*. To get the top *k* tensors or simply identify where the top values are via identifying their indices,  ==you call the function== `topk`  ==with the desired tensor and size.==
 
+## Summary 
 
-
+1. Tensors allow us to handle large amounts of data and calculations at an optimized speed, which is critical for machine learning.
+6. A size of tensor is the product of its shape, where a rank is the tensor's shape length
+	a. For example, the tensor `tf.tensor([[1,2], [1, 2], [1, 2]])` has the shape *[3,2]*, size *6* and rank *2*
+ 10. No, tidy must be passed a normal function
+ 11. You can keep a tensor created inside of tidy either by using `tf.keep`or by returning the tensor from the encapsulated function
+ 13. The `topk`function finds the values and indices for the *k* largest entries along the last dimension
+ 14. Tensors are optimized for batch operations
+ 15. Sometimes called  a *recommender system*, it is a filtering system that seeks to predict the preference of a user

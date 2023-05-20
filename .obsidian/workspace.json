@@ -4,35 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "447ed562172e726d",
+        "id": "ffa6e5ffed94af1f",
         "type": "tabs",
         "children": [
           {
-            "id": "62014453ec49b64a",
+            "id": "30e1a95330fa17d9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tensorflowjs/3_Chapter.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "300928c8919e517f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "MathFoundations/LinearAlgebra.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "MathFoundations/LinearAlgebra.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "MathFoundations/LinearAlgebra.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,9 +126,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "MathFoundations/LinearAlgebra.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -167,21 +146,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ccc9ffb8b64b1fd9",
+  "active": "30e1a95330fa17d9",
   "lastOpenFiles": [
-    "zImages/Screenshot 2023-05-18 at 20.51.17.png",
-    "Tensorflowjs/3_Chapter.md",
+    "Tensorflowjs/4_Chapter.md",
+    "Reactjs/2_Advanced.md",
     "MathFoundations/LinearAlgebra.md",
-    "MathFoundations",
-    "zImages/Screenshot 2023-05-18 at 12.15.44.png",
+    "Screenshot 2023-05-19 at 10.21.56.png",
+    "Screenshot 2023-05-19 at 10.15.43.png",
+    "Tensorflowjs/3_Chapter.md",
     "Tensorflowjs/2_Chapter.md",
     "Tensorflowjs/1_Chapter.md",
+    "zImages/Screenshot 2023-05-18 at 20.51.17.png",
+    "MathFoundations",
+    "zImages/Screenshot 2023-05-18 at 12.15.44.png",
     "Nodejs/Mongoose.md",
     "zImages/Screenshot 2023-05-17 at 12.30.40.png",
     "zImages/Screenshot 2023-05-17 at 12.29.22.png",
     "dsu/Linux/exam.md",
     "zImages/Screenshot 2023-05-14 at 0.03.50.png",
-    "Reactjs/2_Advanced.md",
     "Tensorflowjs",
     "Javascript/Basics.md",
     "Nodejs",
@@ -203,7 +185,6 @@
     "WHAT IS CRIME IN KOREA.md",
     "zImages/Screenshot 2023-02-15 at 19.15.17.png",
     "zImages/Screenshot 2023-02-16 at 9.20.52.png",
-    "zImages/Screenshot 2023-02-13 at 21.34.49.png",
-    "zImages/Screenshot 2023-02-14 at 20.10.12.png"
+    "zImages/Screenshot 2023-02-13 at 21.34.49.png"
   ]
 }
