@@ -11,11 +11,28 @@
             "id": "30e1a95330fa17d9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Nodejs/8_Mongoose.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c5ad4c7136c19c92",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tensorflowjs/4_Chapter.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -89,6 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Tensorflowjs/4_Chapter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Tensorflowjs/4_Chapter.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +145,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Tensorflowjs/4_Chapter.md"
+              }
             }
           }
         ]
@@ -146,20 +167,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "30e1a95330fa17d9",
+  "active": "c5ad4c7136c19c92",
   "lastOpenFiles": [
-    "Tensorflowjs/4_Chapter.md",
-    "Reactjs/2_Advanced.md",
-    "MathFoundations/LinearAlgebra.md",
-    "Screenshot 2023-05-19 at 10.21.56.png",
-    "Screenshot 2023-05-19 at 10.15.43.png",
     "Tensorflowjs/3_Chapter.md",
     "Tensorflowjs/2_Chapter.md",
     "Tensorflowjs/1_Chapter.md",
+    "Tensorflowjs/4_Chapter.md",
+    "MathFoundations/LinearAlgebra.md",
+    "Nodejs/8_Mongoose.md",
+    "Reactjs/2_Advanced.md",
+    "zImages/Screenshot 2023-05-19 at 10.21.56.png",
+    "zImages/Screenshot 2023-05-19 at 10.15.43.png",
     "zImages/Screenshot 2023-05-18 at 20.51.17.png",
     "MathFoundations",
     "zImages/Screenshot 2023-05-18 at 12.15.44.png",
-    "Nodejs/Mongoose.md",
     "zImages/Screenshot 2023-05-17 at 12.30.40.png",
     "zImages/Screenshot 2023-05-17 at 12.29.22.png",
     "dsu/Linux/exam.md",

@@ -8,8 +8,8 @@ A tensor as defined mathematically, is simply a structured set of values of any 
 
 As you add a new dimension to each array, it's often said you are increasing the rank of a tensor.
 
-- *Rank or Order*: The rank of a tensor corresponds to the number of indices needed to specify its components. It indicates the number of dimensions of the tensor. For example, a rank-one tensor is a vector, while a rank-two tensor is a matrix.
-- *Shape and Size*: The shape of a tensor refers to the number of elements along each dimension. For instance, a tensor with shape (3, 4) has three elements along the first dimension and four elements along the second dimension. The size of a tensor represents the total number of elements it contains.
+- *Rank or Order*: The rank of a tensor corresponds to the number of indices needed to specify its components. ==It indicates the number of dimensions of the tensor. For example, a rank-one tensor is a vector, while a rank-two tensor is a matrix.
+- *Shape and Size*: ==The shape of a tensor refers to the number of elements along each dimension==. For instance, a tensor with shape (3, 4) has three elements along the first dimension and four elements along the second dimension. ==The size of a tensor represents the total number of elements it contains==.
 - *Components*: Tensors are composed of components or entries, which are numerical values assigned to each element of the tensor. These components can be real numbers, complex numbers, or even functions, depending on the context.
 
 one-dimensional (1D) array
@@ -34,7 +34,7 @@ const first_again = tf.tensor1d(dataArray);
 
 The second method provides an extra level of runtime checking since you’ve defined the expected dimensionality. Methods exist for verifying up to six dimensions with `tf.tensor6d()`.
 
-The default data type to store numbers is Float32. Floating-point numbers are quite dynamic and impressive. They can usually handle most numbers you’ll need and be ready for values between. Unlike ==JavaScript arrays, a tensor’s data type must be homogeneous (all the same type). These types can be only Float32, Int32, bool, complex64, or string, with no mixing between==.
+==The default data type to store numbers is Float32==. Floating-point numbers are quite dynamic and impressive. They can usually handle most numbers you’ll need and be ready for values between. Unlike ==JavaScript arrays, a tensor’s data type must be homogeneous (all the same type). These types can be only Float32, Int32, bool, complex64, or string, with no mixing between==.
 
 The second parameter of the `tf.tensor` function, defines the shape of the tensor.
 The third parameter of the `tf.tensor` function, which explicitly defines the tensor’s type structure.
@@ -54,7 +54,6 @@ const b = tf.tensor(
 const c = tf.tensor([1, 0, 0, 0, -1, 0, 1, 0, 0], [3, 3]);
 //2D Int 32 tensor
 const d = tf.tensor([1, 0, 0, 0, -1, 0, 1, 0, 0], [3, 3], 'int32');
-
 ```
 
 Tensors are equipped with methods to explain their properties. Useful properties include length (size), dimensionality (rank), and data type (dtype).
@@ -98,7 +97,7 @@ All tensors and models have a `.dispose()` method that purges a tensor from memo
 |Javascript variable is live|This variable is live; you can read the tensor|An error will be raised if you attempt to use this tensor.|
 |JavaScript variable has no reference|This is a memory leak|This is a properly destroyed tensor|
 
-Tensors do have an auto-clean option called tidy(). You can use tidy to create a functional encapsulation that will clean all tensors that aren't returned or flagged for being kept with `keep()`. 
+Tensors do have an auto-clean option called `tidy()`. You can use tidy to create a functional encapsulation that will clean all tensors that aren't returned or flagged for being kept with `keep()`. 
 
 ```js
 //start at zeros tensors
@@ -261,7 +260,7 @@ Tensor
      [16, 12, 15, 5 , 2 , 11]]
 ```
 
-This tensor shows the value of the features of each user. You can use a method called `topk`to help us identify the top values for each user with size *k*. To get the top *k* tensors or simply identify where the top values are via identifying their indices,  ==you call the function== `topk`  ==with the desired tensor and size.==
+This tensor shows the value of the features of each user. You can use a method called `topk`to help us identify the top values for each user with size *k*. To get the top *k* tensors or simply identify where the top values are via identifying their indexes,  ==you call the function== `topk`  ==with the desired tensor and size.==
 
 ## Summary 
 

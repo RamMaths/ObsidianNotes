@@ -42,7 +42,7 @@ The resulting algorithm is essentially a collection of numbers that balance the 
 
 When you create a neural network in TensorFlow.js, it's a code representation of the desired neural network. The framework generates a graph with intelligently selected randomized values for each neuron. The model's file size is generally fixed at this point, but the contents will evolve.
 
-Once training iterations have occurred for some significant amount of time, the neural network weights are evaluated and then adjusted. The speed, often called the learning reate, affects the resulting solution. After taking thousands of these small steps at the learning rate, we start to see a machine that improves.
+Once training iterations have occurred for some significant amount of time, the neural network weights are evaluated and then adjusted. The speed, often called the learning rate, affects the resulting solution. After taking thousands of these small steps at the learning rate, we start to see a machine that improves.
 
 We have left randomness and converged on numbers that make the neural network work! Those numbers assigned to the neurons in a given structure are the trained model.
 

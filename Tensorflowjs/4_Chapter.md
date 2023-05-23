@@ -109,7 +109,7 @@ The `browser.fromPixels` method takes an image and converts it to a tensor. Fort
 
 ### From DOM
 
-To load an image from the DOM, you dimply need a reference to that item on the DOM.
+To load an image from the DOM, you simply need a reference to that item on the DOM.
 
 ```html
 <img src="./dog1.jpeg" id="dog" alt="">
@@ -187,3 +187,179 @@ const bigMess = tf.randomUniform([400, 400, 3], 0, 255); tf.node
 - *7 xDensity* : set the pixels-per-density unit on the x-axis.
 - *8 yDensity* : set the pixels-per-density unit on the y-axis.
 - *9 xmpMetadata* : this is a non-visible message to store in the image metadata. Generally, this is reserved for licensing and scavenger hunts.
+
+### Writing PNGs
+
+The features for writing PNG are significantly more limited than a JPG.
+The  method `node.encodePng` expects an integer representation of our tensor with values ranging 0-255.
+
+```js
+const bigMess = tf.randomUniform([400, 400, 3], 0, 255);
+tf.node.encodePng(bigMess).then((f) => {
+	fs.writeFileSync("simple.png", f);
+	console.log("Basic PNG written!");
+})
+```
+
+The PNG parameters aren't nearly as advanced. The second parameter to `node.encodePng` is a compression setting. This value can be anywhere between -1 and 9. The default value is 1, which means a little compression, and 9 means max compression.
+
+Since PNGs are terrible at compressing randomness, you can set this second parameter to 9 and get a file around the same size as the default setting.
+
+```js
+const randomImg = tf.randomUniform([400, 400, 3], 0, 255, 'int32');
+tf.node.encodePng(randomImg, 9).then((f) => {
+  fs.writeFileSync('simpleCompressed.png', f);
+  console.log('Written!');
+});
+
+```
+
+## Node: Image to Tensor
+
+Node.js is a fantastic tool for training a machine learning model because of the direct file access and speed of decoding images. 
+
+Node provides function for decoding BMP, JPG, PNG and even GIF file formats. However there is also a generic `node.decodeImage` method, which is capable of doing the simple identification lookup and conversion of any of these files automatically. 
+
+```js
+const FILE_PATH = 'files';
+const cakeImagePath = path.join(FILE_PATH, 'simple.jpg');
+const cakeImage = fs.readFileSync(cakeImagePath); //1
+
+tf.tidy(() => {
+  const cakeTensor = tf.node.decodeImage(cakeImage); //2
+  console.log(`Success local file to a ${cakeTensor.shape} tensor`);
+
+  const cakeBWTensor = tf.node.decodeImage(cakeImage, 1); //3
+  console.log(`Success local file to a ${cakeTensor.shape} tensor`);
+})
+```
+
+- *1*: You load the designated file into memory using the filesystem library.
+- *2*: You decode the image into a tensor that matches the imported image's number of color channels.
+- *3*: You decode this image into a grayscale tensor. (Black and White)
+
+### Working with GIFs
+
+The decoding process also allows the decoding of GIF files. For this, you can choose either all frames of the first frame for animated GIFs. The `node.decodeImage` method has a flag that allows you to identify what you prefer.
+
+```js
+const gantCakePath = path.join('files', 'gantcake.gif');
+const gantCake = fs.readFileSync(gantCakePath);
+
+tf.tidy(() => {
+  const gantCakeTensor = tf.node.decodeImage(gantCake, 3, 'int32', true);
+  console.log(`Success local file to a ${gantCakeTensor.shape} tensor`);
+})
+```
+
+In this example of the `node.decodeImage` method we're providing the image data, followed by three channels for color, as an *int32* result tensor, and the final parameter is *true*. Passing *true* lets the method know to unroll the animated GIFs and return a 4D tensor where *false* would clip this down to 3D.
+
+## Common Image Modifications
+
+When images are used for machine learning, they generally have some common modifications.
+
+- Begin mirrored for data augmentation
+- Resizing to the expected input size
+- Cropping out faces or other desired portions
+
+### Mirroring Image Tensors
+
+If you're trying to train a model on identifying cats you can double your dataset by mirroring you existing cat photos.
+
+To flip tensors data for an image, you have two options. One is to modify the image tensor's data in a way that flips the image along the width axis with `tf.reverse`. The other way is to use `tf.image.flipLeftRight`, which is commonly used for batches of images.
+
+#### First way
+
+To flip a single image, you can use `tf.reverse` and specify you want to flip only the axis that holds the pixels for the width of an image.
+
+
+##### Node
+
+```js
+const catImagePath = path.join('files', 'cat.jpg')
+const catImg = fs.readFileSync(catImagePath);
+
+const flipIt = async () => {
+  const catImgTensor = tf.node.decodeImage(catImg);
+  const flippedImg = tf.reverse(catImgTensor, 1); //1
+
+  const file = await tf.node.encodeJpeg(flippedImg);
+  fs.writeFileSync('./files/catF.jpg', file);
+
+  catImgTensor.dispose();
+  flippedImg.dispose();
+
+  console.log(`Written!`);
+};
+
+flipIt().then(() => {
+  console.log(`Memory leak ${tf.memory().numTensors}`);
+});
+```
+
+- *1*: The reverse function flips the axis index 1 to revrese the image.
+
+#### Second way
+
+The second way you can mirror an image is to use `tf.image.flipLeftRight`. This method is geared toward handling batches of images, and batches of 3D tensors are basically 4D tensors.
+
+--- 
+
+##### Batches Increase Dimensions
+
+A 1D tensor is a batch of values, just like a line is a batch of numbers that satisfy a function for that line. When you glue a bunch of lines, you move from 1D to a 2D plane. Similarly, in arrays and tensors you need to add another set of brackets, [ ], to contain a set. Like so:
+
+```
+						[
+[1, 2, 3] & [4, 5, 6] =     [1, 2, 3] ,
+                            [4, 5, 6]
+						]
+
+```
+
+Combining those two 1D tensors of shape [3] created a new 2D tensor of shape [2, 3]. So, a batch of images (3D tensors) will create a 4D tensor.
+
+---
+
+To expand dimensionality of a single 3D image, you can use `tf.expandDims`, and then when you're looking to reverse that(throw away the unnecessary bracket), you can use `tf.squeeze`. This way, you can move a 3D image to 4D for batch processing and back.
+
+So, a $200\times200$ RGB image starts as [200, 200, 3], and then you expand it, essentially making ti a stack of one. The resulting shape becomes [1, 200, 200, 3].
+
+
+##### Example
+
+```js
+const catImagePath = path.join('files', 'cat.jpg')
+const catImg = fs.readFileSync(catImagePath);
+
+const flipIt = async () => {
+  const flipped = tf.tidy(() => {
+    const batchTensor = tf.expandDims( //1
+      tf
+        .node.decodeImage(catImg) //2
+        .asType('float32') //3
+    );
+
+    return tf
+      .squeeze(tf.image.flipLeftRight(batchTensor)) //4
+      .asType('int32'); //5
+  });
+
+  const file = await tf.node.encodeJpeg(flipped);
+  fs.writeFileSync('./files/catFl-batch.jpg', file);
+
+  flipped.dispose();
+};
+
+flipIt().then(() => {
+  console.log(`Memory leak: ${tf.memory().numTensors}`);
+});
+```
+
+- *1* : The dimensions are expanded
+- *2* : Import the 3D image as a tensor
+- *3* : `Image.flipLeftRight` expects images to be a *float32* tensor. This may change in the future.
+- *4* : Flip the image batch and then squeeze it down into a 3D tensor again when you're done.
+- *5* : The `image.flipLeftRight` returned 0-255 values, so you'll need to make sure our tensor you send to any method you use to go from a tensor to an image is an *int32*, so it renders correctly.
+
+That was a bit more complicated, but each strategy has its own benefits and drawbacks. It's essential to take full advantage of the speed and massive calculation capabilities of tensors whenever possible.
