@@ -1,6 +1,6 @@
 # Visual tensors
 
-The most common practice for aa colored pixel is to represent it as three separate values. A pixel is commonly colored by the ordered amounts of red, green, and blue within the confines of a singular byte. This 0-255 array values looks like *[255, 255, 255]*. When our tensor is the data type int32. When our tensor is float32, the values are assumed to be in the range 0-1. So, an integer *[255, 255, 255]* represents pure white, but in float form the equivalent would be *[1, 1, 1]*.
+The most common practice for a colored pixel is to represent it as three separate values. A pixel is commonly colored by the ordered amounts of red, green, and blue within the confines of a singular byte. This 0-255 array values looks like *[255, 255, 255]*. When our tensor is the data type int32. When our tensor is float32, the values are assumed to be in the range 0-1. So, an integer *[255, 255, 255]* represents pure white, but in float form the equivalent would be *[1, 1, 1]*.
 
 ![[Screenshot 2023-05-19 at 10.15.43.png]]
 
@@ -122,7 +122,7 @@ const ourTensor = tf.browser.fromPixels(dogImg);
 console.log(`Succesfull conversion from the dom ${ourTensor.shape}`);
 ```
 
-What if our image is not in an elemnt on our page? So long as the server allows cross-origin loading (Access-Control-Allow-Origin "\*"), you'll be able to dynamically load and process external images.
+What if our image is not in an element on our page? So long as the server allows cross-origin loading (Access-Control-Allow-Origin "\*"), you'll be able to dynamically load and process external images.
 
 ```js
 // Image to Tensor from a url
@@ -143,7 +143,7 @@ Once tensors are converted to their encoded file formats, you'll use the Node.js
 
 ### Writing JPGs
 
-To encode a tensor into a JPG, you will use a method called node.encodeJpeg. This method takes an Int32 representation of the image and some options and returns a promise with the resulting data.
+To encode a tensor into a JPG, you will use a method called node.encodeJpeg. This method takes an *Int32* representation of the image and some options and returns a promise with the resulting data.
 
 ```js
 const tf = require('@tensorflow/tfjs-node');
@@ -258,7 +258,7 @@ In this example of the `node.decodeImage` method we're providing the image data,
 
 When images are used for machine learning, they generally have some common modifications.
 
-- Begin mirrored for data augmentation
+- Being mirrored for data augmentation
 - Resizing to the expected input size
 - Cropping out faces or other desired portions
 
@@ -271,9 +271,6 @@ To flip tensors data for an image, you have two options. One is to modify the im
 #### First way
 
 To flip a single image, you can use `tf.reverse` and specify you want to flip only the axis that holds the pixels for the width of an image.
-
-
-##### Node
 
 ```js
 const catImagePath = path.join('files', 'cat.jpg')
@@ -297,7 +294,7 @@ flipIt().then(() => {
 });
 ```
 
-- *1*: The reverse function flips the axis index 1 to revrese the image.
+- *1*: The reverse function flips the axis index 1 to reverse the image. If you wanted to make the reverse from topside to bottom you should use 0 instead of 1.
 
 #### Second way
 
@@ -363,3 +360,108 @@ flipIt().then(() => {
 - *5* : The `image.flipLeftRight` returned 0-255 values, so you'll need to make sure our tensor you send to any method you use to go from a tensor to an image is an *int32*, so it renders correctly.
 
 That was a bit more complicated, but each strategy has its own benefits and drawbacks. It's essential to take full advantage of the speed and massive calculation capabilities of tensors whenever possible.
+
+### Resizing Image Tensors
+
+Lots of AI models expect a specific input image size. That means that while your users upload $700\times900$ images, the model is looking for a tensor that is $256\times256$. Tensorflow.js has two excellent method for resizing images, and both support batches of images: `image.resizeBilinear` and `image.resizeNearestNeighbor`,  save the last one for when the specific pixel values of an image cannot be compromised. There is a small speed difference, `image.resizeNearestNeighbor` being around $10x$ faster than `image.resizeBilinear`, `resizeBilinear` blurs and `resizeNearestNeighbor` pixelates when they have to extrapolate for new data.
+
+```js
+const resizeIt = async () => {
+  const newSize = [316, 172]; //1
+  const image = fs.readFileSync(path.join('files', 'cat.jpg'));
+  const catTensor = tf.node.decodeImage(image);
+
+  const nnResizeTensor = tf.image.resizeNearestNeighbor( //2
+    catTensor,
+    newSize,
+    true //3
+  ); 
+
+  let file = await tf.node.encodeJpeg(nnResizeTensor);
+  fs.writeFileSync('./files/little-catnn.jpg', file);
+
+  const blResizeTensor = tf.image.resizeBilinear( //4
+    catTensor,
+    newSize,
+    true //5
+  );
+  const blResizeTensorInt = blResizeTensor.asType('int32'); //6
+
+  file = await tf.node.encodeJpeg(blResizeTensorInt);
+  fs.writeFileSync('./files/little-catbl.jpg', file);
+
+  tf.dispose([catTensor, nnResizeTensor, blResizeTensor, blResizeTensorInt]);
+};
+
+resizeIt().then(() => {
+  console.log(`Memory leak ${tf.memory().numTensors}`);
+});
+```
+
+- *1*: Increase an image size
+- *2*: Resize using the nearest neighbor algorithm.
+- *3*: The third parameter is `alginCorners`
+- *4*: Resize with the bilinear algorithm
+- *5*: Always set this to *true*
+- *6*: As of this writing, `resizeBilinear` returns a *float32*, which you have to convert
+
+### Cropping Image Tensors
+
+This is an example of carving out some tensor data from a 3D tensor. If you were to imagine this in space, it would be like carving a small rectangle slice from a larger rectangle cake.
+
+```js
+const cropIt = async () => {
+  const startingPoint = [0, 80, 0]; //1
+  const newSize = [172, 316, 3]; //2
+  const image = fs.readFileSync(path.join('files', 'cat.jpg'));
+  const catTensor = tf.node.decodeImage(image);
+
+  const cropped = tf.slice(catTensor, startingPoint, newSize); //3
+  const file = await tf.node.encodeJpeg(cropped);
+  fs.writeFileSync('./files/cropCat.jpg', file);
+
+  tf.dispose([catTensor, cropped]);
+};
+
+cropIt().then(() => console.log(`Memory leak ${tf.memory().numTensors}`));
+```
+
+- *1*: Start 0 pixels down, 80 pixels over, and at the red channel.
+- *2*: Grab the next 265 pixels height, 245 pixels width, and all three RGB values.
+- *3*: Pass everything into the `tf.slice` method.
+
+## Chapter Challenge
+
+How can you generate a random 400 x 400 grayscale tensor and then sort the random pixels along an axis?
+
+```js
+
+let tensorImg = tf.randomUniform([400, 400, 1], 0, 255, 'int32');
+const arrays = tensorImg.arraySync();
+tensorImg.dispose();
+
+const finalArray = [];
+
+for(let i=0; i<400; i++) {
+  const tensor_1d = tf.tensor(arrays[i], [400]);
+  const array_1d = tensor_1d.arraySync();
+  array_1d.sort((a, b) => b - a);
+  finalArray.push(array_1d);
+  tensor_1d.dispose();
+}
+
+tensorImg = tf.tensor(finalArray, [400, 400, 1]);
+tf.node.encodeJpeg(tensorImg).then((file) => {
+  fs.writeFileSync('./files/challengeChaos.jpg', file);
+  tensorImg.dispose();
+  console.log(`Memory leak ${tf.memory().numTensors}`);
+});
+```
+
+
+# Review section
+
+- *9*: Which is faster:ㅁ	
+	a. Looping over a collection of images and resizing them
+	b. Batching a group of images as a rank-four tensor and resizing the entire tensor.
+	Answer: b

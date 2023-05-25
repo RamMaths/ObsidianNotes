@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "ffa6e5ffed94af1f",
+        "id": "6f3c5d7305e2e2ee",
         "type": "tabs",
         "children": [
           {
-            "id": "30e1a95330fa17d9",
+            "id": "d4191279f4800ecb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Nodejs/8_Mongoose.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c5ad4c7136c19c92",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tensorflowjs/4_Chapter.md",
+                "file": "Tensorflowjs/1_Chapter.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Tensorflowjs/4_Chapter.md",
+                "file": "Tensorflowjs/1_Chapter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Tensorflowjs/4_Chapter.md",
+                "file": "Tensorflowjs/1_Chapter.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tensorflowjs/4_Chapter.md"
+                "file": "Tensorflowjs/1_Chapter.md"
               }
             }
           }
@@ -167,15 +154,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c5ad4c7136c19c92",
+  "active": "d4191279f4800ecb",
   "lastOpenFiles": [
+    "zImages/Screen Shot 2022-12-11 at 9.30.55.png",
+    "Tensorflowjs/5_Chapter.md",
+    "Tensorflowjs/4_Chapter.md",
+    "dsu/Linux/Part_5.md",
+    "Brainstorm.md",
+    "dsu/Linux/Part_6.md",
+    "Carta.md",
+    "Tensorflowjs/1_Chapter.md",
+    "Reactjs/2_Advanced.md",
     "Tensorflowjs/3_Chapter.md",
     "Tensorflowjs/2_Chapter.md",
-    "Tensorflowjs/1_Chapter.md",
-    "Tensorflowjs/4_Chapter.md",
-    "MathFoundations/LinearAlgebra.md",
+    "Diagrams samples.md",
     "Nodejs/8_Mongoose.md",
-    "Reactjs/2_Advanced.md",
+    "MathFoundations/LinearAlgebra.md",
     "zImages/Screenshot 2023-05-19 at 10.21.56.png",
     "zImages/Screenshot 2023-05-19 at 10.15.43.png",
     "zImages/Screenshot 2023-05-18 at 20.51.17.png",
@@ -200,10 +194,7 @@
     "Javascript/NumbersDatesEtc.md",
     "Javascript/documentObject.md",
     "Javascript/Data structures and modern operators.md",
-    "React/README.md",
     "Reactjs",
-    "random notes.md",
-    "WHAT IS CRIME IN KOREA.md",
     "zImages/Screenshot 2023-02-15 at 19.15.17.png",
     "zImages/Screenshot 2023-02-16 at 9.20.52.png",
     "zImages/Screenshot 2023-02-13 at 21.34.49.png"

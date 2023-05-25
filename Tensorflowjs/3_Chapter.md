@@ -65,14 +65,14 @@ console.log(`Size: ${second.size}`);
 console.log(`Data type: ${second.dtype}`);
 ```
 
-Tensors are immutable, once a tensor is created you're stuck with it. While you cannot modify this tensor, you can easily create a new tensor with the correct type and data. For this, you can use `asType` 
+==Tensors are immutable, once a tensor is created you're stuck with it==. While you cannot modify this tensor, you can easily create a new tensor with the correct type and data. For this, you can use `asType` 
 
 ```js
 const nope = tf.tensor([4], null, 'float32');
 const yep = nope.asType('int32');
 ```
 
-It's important to note these conversions are quick and dirty.If you have the value 3.9999 and you convert it to Int32, it becomes 3. There's no logic in bringing the value to the nearest Int32. Boolean tensors switch to 0 and 1, and string tensors will flat-out error. If you're converting  a tensor's data type, make sure you're ready for the results.
+It's important to note these conversions are quick and dirty.If you have the value 3.9999 and you convert it to Int32, it becomes 3. ==There's no logic in bringing the value to the nearest Int32==. Boolean tensors switch to 0 and 1, and string tensors will flat-out error. If you're converting  a tensor's data type, make sure you're ready for the results.
 
 ## Tensors provide speed 
 

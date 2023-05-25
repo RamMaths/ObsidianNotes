@@ -38,7 +38,7 @@ The algorithm is much smaller than the data that was used to create it. Gigabyte
 
 The resulting algorithm is essentially a collection of numbers that balance the outlined structure identified by the human programmer. ==The collection of numbers and their associated neural graph is often called a model==.
 
-![[Screenshot 2023-05-14 at 0.03.50.png]]
+![[../zImages/Screenshot 2023-05-14 at 0.03.50.png]]
 
 When you create a neural network in TensorFlow.js, it's a code representation of the desired neural network. The framework generates a graph with intelligently selected randomized values for each neuron. The model's file size is generally fixed at this point, but the contents will evolve.
 
