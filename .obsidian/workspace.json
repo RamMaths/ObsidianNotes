@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "6f3c5d7305e2e2ee",
+        "id": "6032496de2058cbc",
         "type": "tabs",
         "children": [
           {
-            "id": "d4191279f4800ecb",
+            "id": "773030214eded30b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tensorflowjs/1_Chapter.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -93,7 +89,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Tensorflowjs/1_Chapter.md",
+                "file": "MachineLearning/Chapter_1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +106,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Tensorflowjs/1_Chapter.md",
+                "file": "MachineLearning/Chapter_1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +129,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tensorflowjs/1_Chapter.md"
+                "file": "MachineLearning/Chapter_1.md"
               }
             }
           }
@@ -154,22 +150,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d4191279f4800ecb",
+  "active": "ccc9ffb8b64b1fd9",
   "lastOpenFiles": [
-    "zImages/Screen Shot 2022-12-11 at 9.30.55.png",
+    "Python/notebook/chapter_2.ipynb",
+    "Python/notebook",
+    "Chapter_1.md",
+    "MachineLearning/Chapter_1.md",
+    "Reactjs/2_Advanced.md",
+    "Reactjs/3_React_Router_6.md",
     "Tensorflowjs/5_Chapter.md",
     "Tensorflowjs/4_Chapter.md",
+    "Reactjs/1_Fundamentals.md",
+    "Javascript/AdvancedDOM.md",
+    "zImages/Screen Shot 2022-12-11 at 9.30.55.png",
+    "Simple_notes.md",
+    "Python",
+    "zImages/Screenshot 2023-05-26 at 21.27.55.png",
+    "Diagrams samples.md",
+    "Carta.md",
+    "MachineLearning",
+    "Tensorflowjs/1_Chapter.md",
+    "MathFoundations/LinearAlgebra.md",
+    "zImages/Screenshot 2023-05-26 at 12.23.32.png",
     "dsu/Linux/Part_5.md",
     "Brainstorm.md",
     "dsu/Linux/Part_6.md",
-    "Carta.md",
-    "Tensorflowjs/1_Chapter.md",
-    "Reactjs/2_Advanced.md",
     "Tensorflowjs/3_Chapter.md",
     "Tensorflowjs/2_Chapter.md",
-    "Diagrams samples.md",
     "Nodejs/8_Mongoose.md",
-    "MathFoundations/LinearAlgebra.md",
     "zImages/Screenshot 2023-05-19 at 10.21.56.png",
     "zImages/Screenshot 2023-05-19 at 10.15.43.png",
     "zImages/Screenshot 2023-05-18 at 20.51.17.png",
@@ -184,19 +192,10 @@
     "Nodejs",
     "Javascript/Asynchronous Javascript.md",
     "Javascript/Arrays.md",
-    "Javascript/AdvancedDOM.md",
     "dsu/Linux",
     "dsu",
-    "Reactjs/1_Fundamentals.md",
     "Javascript/Theory.md",
     "Javascript/ProjectPlanning.md",
-    "Javascript/OOP.md",
-    "Javascript/NumbersDatesEtc.md",
-    "Javascript/documentObject.md",
-    "Javascript/Data structures and modern operators.md",
-    "Reactjs",
-    "zImages/Screenshot 2023-02-15 at 19.15.17.png",
-    "zImages/Screenshot 2023-02-16 at 9.20.52.png",
-    "zImages/Screenshot 2023-02-13 at 21.34.49.png"
+    "Reactjs"
   ]
 }

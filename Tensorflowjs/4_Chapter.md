@@ -273,10 +273,9 @@ To flip tensors data for an image, you have two options. One is to modify the im
 To flip a single image, you can use `tf.reverse` and specify you want to flip only the axis that holds the pixels for the width of an image.
 
 ```js
-const catImagePath = path.join('files', 'cat.jpg')
-const catImg = fs.readFileSync(catImagePath);
-
 const flipIt = async () => {
+  const catImagePath = path.join('files', 'cat.jpg')
+  const catImg = fs.readFileSync(catImagePath);
   const catImgTensor = tf.node.decodeImage(catImg);
   const flippedImg = tf.reverse(catImgTensor, 1); //1
 
