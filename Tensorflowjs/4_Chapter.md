@@ -159,7 +159,8 @@ tf.node.encodeJpeg(bigMess).then((f) => {
 Because the file you're writing is a JPG, there's a wide variety of configuration options you can enable.
 
 ```js
-const bigMess = tf.randomUniform([400, 400, 3], 0, 255); tf.node
+const bigMess = tf.randomUniform([400, 400, 3], 0, 255); 
+tf.node
   .encodeJpeg(
 	bigMess,
 	"rgb", //1
@@ -191,7 +192,7 @@ const bigMess = tf.randomUniform([400, 400, 3], 0, 255); tf.node
 ### Writing PNGs
 
 The features for writing PNG are significantly more limited than a JPG.
-The  method `node.encodePng` expects an integer representation of our tensor with values ranging 0-255.
+<mark>The  method `node.encodePng` expects an integer representation</mark> of our tensor with values ranging 0-255.
 
 ```js
 const bigMess = tf.randomUniform([400, 400, 3], 0, 255);
@@ -336,8 +337,7 @@ const flipIt = async () => {
         .asType('float32') //3
     );
 
-    return tf
-      .squeeze(tf.image.flipLeftRight(batchTensor)) //4
+    return tf.squeeze(tf.image.flipLeftRight(batchTensor)) //4
       .asType('int32'); //5
   });
 
@@ -354,7 +354,7 @@ flipIt().then(() => {
 
 - *1* : The dimensions are expanded
 - *2* : Import the 3D image as a tensor
-- *3* : `Image.flipLeftRight` expects images to be a *float32* tensor. This may change in the future.
+- *3* : <mark>`Image.flipLeftRight` expects images to be a float32 tensor. This may change in the future</mark>.
 - *4* : Flip the image batch and then squeeze it down into a 3D tensor again when you're done.
 - *5* : The `image.flipLeftRight` returned 0-255 values, so you'll need to make sure our tensor you send to any method you use to go from a tensor to an image is an *int32*, so it renders correctly.
 

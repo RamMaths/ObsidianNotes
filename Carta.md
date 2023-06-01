@@ -1,8 +1,0 @@
-
-# Academic and cultural experience
-
-I am living one of the most great experiences that I have had. The campus is really pretty, I am meeting good friend at class and all my professors are really nice. I like my Korean class because I am getting more skills in this language to use it when I go out. I am also learning a lot in my classes related to my major, for one of my final projects I will make a smart garden project using technology that I have been learning throughout the semester, I will take all this Knowledge with me to my country and I will apply it in projects for the will of my community.
-
-# Future plans in your home country
-
-I will keep learning the language, I will try to take it to the next level. I am interested in AI, since this kind of technologies are being really used nowadays I will learn it as much as possible. I am also interested on growing my academic career, that's why I will keep learning the language to try to come back and do my master's degree here in Korea the capital of technology. This days one governor of one Mexican state close to the one that I live came here to Busan, He is investing in Korean technology and He is bringing companies like KIA and others to Mexico. I will try to take advantage of my Knowledge in Technology, but also my experience with English and Korean language to be a good aspirant for these companies in the future.  I hope the relationship between our countries continues to flourish for the will of our communities.

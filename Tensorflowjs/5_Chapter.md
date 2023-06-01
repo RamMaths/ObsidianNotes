@@ -191,17 +191,21 @@ tf.ready().then(() => {
 });
 ```
 
-- *1*: This is the URL to the TFHub for the Inception model
-- *2*: Load the graph model and set from TFHub to true
-- *3*: The image is resized to $299\times299$
-- *4*: Convert the `fromPixels` results to values between 0 and 1 (normalizing the data)
-- *5*: Convert the 3D tensor to a single batch 4D tensor like the model expects
-- *6*: Predict on the image
-- *7*: The print is so big it gets trimmed
-- *8*: Recover the top three values as our guesses
-- *9*: Print the top three prediction indices
+*1*. `tf.loadGraphModel(modelPath, { fromTFHub: true }).then(model => { ... })`: This code loads the pre-trained Inception V3 model from the specified `modelPath` using the `loadGraphModel` function. The `{ fromTFHub: true }` option indicates that the model is being loaded from TensorFlow Hub. The loaded model is passed as an argument to the `then` function.
+*2*. `const readyfied = tf.image.resizeBilinear(myTensor, [299, 299], true)`: This code resizes the input image tensor `myTensor` to the dimensions of [299, 299] using bilinear interpolation. The `true` argument indicates that the values should be normalized between 0 and 1.
+*3*. `.div(255)`: This code divides the pixel values of the tensor by 255 to normalize them between 0 and 1. This step is often performed before feeding images into a neural network.
+*4*. `.reshape([1, 299, 299, 3]);`: This line reshapes the tensor to have a shape of [1, 299, 299, 3], where 1 represents the batch size, 299 represents the width and height of the image, and 3 represents the number of color channels (RGB).
+*5*. `const result = model.predict(readyfied);`: The `predict` function is used to make predictions on the preprocessed input image tensor `readyfied` using the loaded model. It returns a tensor representing the predicted probabilities for each class.
+*6*.  `const { values, indices } = tf.topk(result, 3);`: The `topk` function is used to find the top k values and indices from the `result` tensor. In this case, it finds the top 3 values and indices representing the highest predicted probabilities.
+    
+In the given code, batch processing refers to the processing of multiple images simultaneously as a batch. Instead of processing images one by one, batch processing allows you to process a group of images together, taking advantage of parallelism and optimizing performance.
+
+In the code snippet, the input image tensor is reshaped to have a shape of `[1, 299, 299, 3]`, where `1` represents the batch size. This means that the code is processing a single image at a time. If you wanted to process multiple images in a batch, you would need to modify the code to have a larger batch size, such as `[batchSize, 299, 299, 3]`, where `batchSize` is the number of images in the batch.
+
+Batch processing is commonly used in deep learning models to improve efficiency during training or inference. It allows for parallel execution on modern hardware, such as GPUs, which can process multiple inputs simultaneously. By processing images in batches, you can take advantage of the hardware's parallelism and potentially achieve faster computation times compared to processing images one by one.
+
 ---
-- *10*: Map the indices to their labels and print them. `INCEPTION_CLASSES` is an array of labels that maps to the model output. I got this array with the url above.
+- *10*: Map the indices to their labels and print them. `INCEPTION_CLASSES` is an array of labels that maps to the model output. I got this array with the url above. First I save the file from the link
 
 ```js
 import * as https from('https');
@@ -222,7 +226,7 @@ const url = 'https://storage.googleapis.com/download.tensorflow.org/data/ImageNe
 download(url, './files/array.txt');
 ```
 
-first we save the file from the link
+Then we export the array that we saved into our files.
 
 ```js
 import * as fs from 'fs';
@@ -234,8 +238,143 @@ const INCEPTION_CLASSES = arrayTxt.toString().split('\n');
 export default INCEPTION_CLASSES;
 ```
 
-Then we export the array that we saved into our files.
+---
+
+## Pet recognizer model
+
+We'll implement a bounding box that identifies an object in a photo. Rather than classifying an entire photo, the AI high-lights a specific bounding box within a photo.
+
+Normally, the bounding box output of a model is fairly complex because it handles a variety of classes and overlapping boxes. Usually, the model leaves you to use some math to properly clean up the results. Let's just focus on drawing a single rectangle on predicted output in TensorFlow.js. This is sometimes called *object localization*.
+
+The model for this final exercise will be a pet face detector. The model will do its best to give us a bounding set of coordinates for where it thinks the pet's face is located.
+
+The small, 2-ish MB model expects a $256 \times 256$ *Float32* input RGB image of a pet and outputs four numbers to identify a bounding box around the pet's face. The four numbers in the 1D tensor are the top-left point and the bottom-right point.
 
 ---
 
+X is the horizontal indicator, and Y is the vertical indicator. So, the given four values from the model will identify two points. Unlike a normal Cartesian coordinate system, the origin is the top left, and points only exist in the positive domain. Positive Y values move right along the image, and positive X values move down along the image, from the origin.
 
+---
+
+First we import the image and the canvas from the html document
+
+```js
+const rawImg = document.getElementById('pet');
+const detImg = document.getElementById('detection');
+```
+
+Now we use the `tf.ready()` and then the `loadLayersModel` to import the model. Also we need to use the `tidy()` method to avoid memory leaks. 
+
+```js
+const tensorImg = tf.browser.fromPixels(rawImg);
+const resizedTensor = tf
+.image
+.resizeNearestNeighbor(tensorImg, [256, 256], true)
+.div(255)
+.reshape([1, 256, 256, 3]);
+
+const result = model.predict(resizedTensor);
+result.print();
+```
+
+Create a tensor from the image then we resize it to the model input format, the we use the `predict` method to get the results from the model.
+
+### Labeling the detection
+
+Now you can draw the result coordinates as a rectangle over the image. The basics of drawing a tensor result over an image require you to place the image in a container and then position an absoulte canvas over that image.
+
+![[Screenshot 2023-05-28 at 12.15.11.png]]
+
+This is how the html code would look like in a simplified way.
+
+```html
+<div style="position: relative;">
+<img id="pet" src="/dog3.jpg" width="100%" />
+<canvas 
+	id="detection" 
+	style="position: absolute; left: 0; "
+>
+</canvas>
+<script src="./index.js"></script>
+</div>
+```
+
+For a simple rectangle, you can use the canvas context's `strokeRect` method which doesn't take two points like the model returns. It takes a starting point and then a width and height. <mark>Remember, the tensor output is a percentage and will need to be scaled in each dimension</mark>.
+
+```js
+const imgWidth = rawImg.width;
+const imgHeight = rawImg.height;
+detImg.width = imgWidth;
+detImg.height = imgHeight;
+const box = result.dataSync();
+const startX = box[0] * imgWidth;
+const startY = box[1] * imgHeight;
+const width = (box[2] - box[0]) * imgWidth;
+const height = (box[3] - box[1]) * imgHeight;
+console.log(startX, startY, width, height);
+const ctx = detImg.getContext("2d");
+ctx.strokeStyle = '#0F0';
+ctx.lineWidth = 4;
+ctx.strokeRect(startX, startY, width, height);
+```
+
+When the page loads, the delay you're experiencing includes loading a model and loading it into accelerated memory of some type (sometimes called *model warmup*) if you were to call `model.predict` and draw again, you would see results in microseconds. The canvas + TensorFlow.js structure you created in this final section can easily support 60+ frames per second on a desktop computer.
+
+## Chapter Challenge: Cute Faces
+
+Given a pet's location from the previous code, write the additional code to extract the pet's face and prep it for a model that requires a $96 \times 96$ image input.
+
+```node
+import * as tf from '@tensorflow/tfjs-node';
+import * as fs from 'fs';
+import * as sharp from 'sharp';
+
+tf.ready().then(() => {
+  //image path
+  const imgPath = './files/dog1.jpg';
+  //model path
+  const modelUrl = 'https://raw.githubusercontent.com/RamMaths/Models/main/tfjs_quant_uint8/model.json'; 
+  //importing image
+  const img = fs.readFileSync(imgPath);
+  //getting the image properites with the sharp module
+  sharp.default(imgPath).metadata().then(imgProps => {
+    //loading the model
+    tf.loadLayersModel(modelUrl).then(model => {
+      tf.tidy(() => {
+        //loading & preparing the image for the model
+        const imgTensor = tf.node.decodeImage(img);
+        const resizedTensor = tf
+          .image
+          .resizeNearestNeighbor(imgTensor, [256, 256], true)
+          .div(255)
+          .reshape([1, 256, 256, 3]);
+
+        //using the model
+        const result = model.predict(resizedTensor);
+        const data = result.dataSync();
+
+        //matching output with original size
+        const startX = data[0] * imgProps.width;
+        const startY = data[1] * imgProps.height;
+        const width = parseInt((data[2] - data[0]) * imgProps.width, 0);
+        const height = parseInt((data[3] - data[1]) * imgProps.height, 0);
+
+        //croppping th image
+        const cropped = tf.slice(imgTensor, [startY, startX], [height, width, 3]);
+
+        //rezing to 96 x 96
+        const readyFace = tf
+          .image
+          .resizeBilinear(cropped, [96, 96], true)
+
+        //saving the file
+        tf.node.encodeJpeg(readyFace).then(finalImg => {
+          fs.writeFileSync('./files/croppedImg.jpg', finalImg);
+        });
+      });
+    });
+  }).then(() => {
+    console.log(`Memory leak: ${tf.memory().numTensors}`);
+  });
+});
+```
